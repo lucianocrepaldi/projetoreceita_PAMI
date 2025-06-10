@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,15 @@ import {
   Button,
 } from 'react-native';
 
+// Mapa de imagens locais
+const imageMap = {
+  lasanha: require('../assets/imagens/lasanha.jpg'),
+  salada: require('../assets/imagens/salada.jpg'),
+  frango: require('../assets/imagens/frango.jpg'),
+  macarrao: require('../assets/imagens/macarrao.jpg'),
+  mousse: require('../assets/imagens/mousse.jpg'),
+};
+
 export default function RecipeCard({
   title,
   description,
@@ -16,15 +25,12 @@ export default function RecipeCard({
   onToggleFavorite,
   isFavorite,
 }) {
-  const [loadError, setLoadError] = useState(false);
-
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
       <Image
-        source={{ uri: image }}
+        source={imageMap[image] || require('../assets/placeholder.png')}
         style={styles.image}
         resizeMode="cover"
-        onError={() => setLoadError(true)}
       />
       <Text style={styles.title}>{title}</Text>
       <Text>{description}</Text>
